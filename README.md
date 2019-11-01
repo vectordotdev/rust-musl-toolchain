@@ -30,4 +30,4 @@ installed inside the toolchain image.
 
 ## License
 
-This project is licensed [Apache License, Version 2.0](LICENSE).
+This project is licensed under [Apache License, Version 2.0](LICENSE).
