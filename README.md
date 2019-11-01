@@ -27,3 +27,7 @@ in order to be able to run `cargo-armv7 build`, `cargo-armv7 test`, etc.
 
 Note that the tests should work too, although they are compiled for the target platform, with help of user-mode QEMU
 installed inside the toolchain image.
+
+## License
+
+This project is licensed [Apache License, Version 2.0](LICENSE).
