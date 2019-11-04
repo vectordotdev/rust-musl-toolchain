@@ -1,13 +1,13 @@
-# Timber.io Rust toolchain
+# Timber.io Rust `musl` toolchain
 
-This is a [Timber.io](https://timber.io) Rust toolchain. It is used to compile
+This is a [Timber.io](https://timber.io) Rust `musl` toolchain. It is used to compile
 [Vector](http://github.com/timberio/vector) release binaries.
 
 ## Main features
 * Produces statically-linked binaries for `x86_64` and `armv7` Linux
 * Uses `musl` as the standard C library
 * Uses `libc++` as the standard C++ library
-* Enables cross-language link-time optimization
+* Leverages `clang` and `lld` to enable cross-language link-time optimization
 
 ## Usage
 
