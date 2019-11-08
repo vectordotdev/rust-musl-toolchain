@@ -1,0 +1,50 @@
+#
+# Workflow Macros
+#
+push-filters: &push-filters
+  filters:
+    branches:
+      only:
+        - master
+        - ci-build-images
+
+version: 2
+jobs:
+  build-x86_64-unknown-linux-musl:
+    resource_class: large
+    # docker:
+    #   - image: circleci/buildpack-deps:bionic-scm
+    machine:
+      docker_layer_caching: true
+    steps:
+      - checkout
+      - run: |
+          RUST_VERSION=1.38.0
+          LLVM_GIT_COMMIT=71fe7ec06b85f612fc0e4eb4134c7a7d0f23fac5
+          MUSL_VERSION=1.1.22
+          TARGET=x86_64-unknown-linux-musl
+          GNU_TARGET=""
+          docker build -t timberio/rust-musl-toolchain:$RUST_VERSION-$TARGET \
+            --build-arg RUST_VERSION="$RUST_VERSION" \
+            --build-arg LLVM_GIT_COMMIT="$LLVM_GIT_COMMIT" \
+            --build-arg MUSL_VERSION="$MUSL_VERSION" \
+            --build-arg TARGET="$TARGET" \
+            --build-arg GNU_TARGET="$GNU_TARGET" \
+            .
+
+  push-x86_64-unknown-linux-musl:
+    resource_class: large
+    machine: true
+    steps:
+      - run: echo ok
+
+workflows:
+  version: 2
+
+  build-and-push:
+    jobs:
+      - build-x86_64-unknown-linux-musl
+      - push-x86_64-unknown-linux-musl:
+          requires:
+            - build-x86_64-unknown-linux-musl
+          <<: *push-filters
