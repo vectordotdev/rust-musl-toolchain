@@ -82,7 +82,7 @@ ENV MUSL_DIR $SRC_DIR/musl-$MUSL_VERSION
 
 ARG LINUX_HEADERS_VERSION
 RUN curl --proto '=https' --tlsv1.2 -sSf \
-  https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-$LINUX_HEADERS_VERSION.tar.xz && \
+  https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-$LINUX_HEADERS_VERSION.tar.xz > linux-$LINUX_HEADERS_VERSION.tar.xz && \
   tar xJvf linux-$LINUX_HEADERS_VERSION.tar.xz && \
   rm linux-$LINUX_HEADERS_VERSION.tar.xz
 ENV LINUX_DIR $SRC_DIR/linux-$LINUX_HEADERS_VERSION
